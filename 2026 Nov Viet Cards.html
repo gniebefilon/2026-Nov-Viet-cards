@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hanoi Vietnamese Cards</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a080f">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇻🇳</text></svg>">
+<style>
+:root{--base:#0a080f;--text:#e5e7eb;--muted:#a1a1b5;--gold1:#fbbf24;--gold2:#d97706;--teal:#06b6d4;--rose:#ec4899;--purple:#8b5cf6;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--base)}
+body{margin:0;min-height:100vh;color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:18px 16px 32px;max-width:560px;margin-inline:auto;
+background:radial-gradient(circle at 15% 0%,rgba(139,92,246,.35),transparent 50%),radial-gradient(circle at 90% 35%,rgba(6,182,212,.22),transparent 55%),radial-gradient(circle at 10% 90%,rgba(236,72,153,.15),transparent 50%),var(--base);background-attachment:fixed}
+h1{font-size:1.6rem;margin:8px 0 2px;background:linear-gradient(90deg,var(--gold1),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);font-size:.9rem;margin:0 0 14px}
+#tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+#tabs button{flex:1 1 auto;font:inherit;font-size:.95rem;font-weight:600;color:var(--teal);padding:8px 10px;border:1px solid var(--purple);border-radius:999px;background:rgba(139,92,246,.12);cursor:pointer}
+#tabs button.on{background:rgba(139,92,246,.4);box-shadow:0 0 12px rgba(139,92,246,.35)}
+h3{margin:10px 0 0;font-size:.85rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.07em}
+h3::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--rose);margin-right:6px;vertical-align:middle}
+.gn{margin:2px 0 0;font-size:.82rem;color:var(--muted)}
+#list{display:grid;gap:14px}
+.c{perspective:800px;height:236px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;text-align:center}
+.front{background:linear-gradient(145deg,rgba(139,92,246,.28),rgba(10,8,15,.85));border:1px solid rgba(139,92,246,.6);box-shadow:0 0 18px rgba(139,92,246,.25)}
+.front .w{font-size:2.6rem;font-weight:800;background:linear-gradient(90deg,var(--gold1),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hint{font-size:.78rem;color:var(--muted);margin-top:8px}
+.back{transform:rotateY(180deg);background:linear-gradient(145deg,rgba(6,182,212,.22),rgba(139,92,246,.3) 60%,rgba(10,8,15,.9));border:1px solid rgba(6,182,212,.6);box-shadow:0 0 18px rgba(6,182,212,.2)}
+.lab{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--teal);font-weight:700}
+.lab::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--rose);margin-right:6px;vertical-align:middle}
+.val{font-size:1.2rem;font-weight:700;color:var(--text)}
+.pr{font-size:1.02rem;color:var(--text)}
+.ex{margin-top:10px;padding-top:8px;border-top:1px dashed rgba(236,72,153,.6);font-size:.85rem;color:var(--text);font-style:italic;width:100%}
+.note{margin-top:18px;font-size:.8rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<h1>Learn Hanoi Vietnamese</h1>
+<p class="sub">Natural, everyday words used in Hanoi</p>
+<div id="tabs"></div>
+<div id="list"></div>
+<p class="note">Pronunciation is approximate. Tap a card to flip it.</p>
+<script>
+var C=[
+{n:"Verbs – Động từ",items:[
+{v:"đi",e:"to go",p:"dee",s:"Tôi đi chợ. – I go to the market."},
+{v:"đến",e:"to come / arrive",p:"dehn (rising)",s:"Mai bạn đến nhé. – Come tomorrow, okay?"},
+{v:"ăn",e:"to eat",p:"un (short, like “uhn”)",s:"Ăn cơm chưa? – Have you eaten yet?"},
+{v:"uống",e:"to drink",p:"oo-ohng (rising)",s:"Tôi uống cà phê. – I drink coffee."},
+{v:"muốn",e:"to want",p:"moo-ohn (rising)",s:"Tôi muốn học. – I want to study."},
+{v:"cần",e:"to need",p:"kuhn (low falling)",s:"Tôi cần giúp. – I need help."},
+{v:"biết",e:"to know",p:"byet (rising, short)",s:"Tôi biết rồi. – I know already."},
+{v:"hiểu",e:"to understand",p:"hyew (dip, then rise)",s:"Tôi không hiểu. – I don’t understand."},
+{v:"nói",e:"to speak",p:"noy (rising)",s:"Bạn nói chậm nhé. – Please speak slowly."}]},
+{n:"Pronouns – Đại từ",items:[
+{g:"Basic pronouns",v:"tôi",e:"I / me",p:"toy",s:"Tôi là sinh viên. – I am a student."},
+{v:"bạn",e:"you (friend or peer)",p:"bahn (low, heavy)",s:"Bạn khỏe không? – How are you?"},
+{v:"anh ấy",e:"he",p:"ayn uh-ee",s:"Anh ấy đi làm. – He goes to work."},
+{v:"cô ấy",e:"she",p:"koh uh-ee",s:"Cô ấy ở Hà Nội. – She lives in Hanoi."},
+{v:"chúng ta",e:"we (including you)",p:"choong tah",s:"Chúng ta đi nhé. – Let’s go."},
+{v:"chúng tôi",e:"we (not including you)",p:"choong toy",s:"Chúng tôi ăn phở. – We eat phở."},
+{v:"họ",e:"they",p:"haw (low, heavy)",s:"Họ đang ăn. – They are eating."},
+{v:"của tôi",e:"my",p:"koo-ah toy",s:"Sách của tôi. – My book."},
+{v:"của bạn",e:"your",p:"koo-ah bahn",s:"Điện thoại của bạn. – Your phone."},
+{g:"Social pronouns",gn:"In Hanoi you pick a word by the other person’s age relative to you. These replace “I” and “you”.",v:"anh",e:"older brother · you (to a man a bit older)",p:"ayn",s:"Anh khỏe không? – How are you, brother?"},
+{v:"chị",e:"older sister · you (to a woman a bit older)",p:"chee (low, heavy)",s:"Chị ơi, cho em hỏi. – Excuse me, may I ask?"},
+{v:"em",e:"younger sibling · you or I (to someone younger)",p:"em",s:"Em chào chị. – Hello, (older) sister."},
+{v:"cô",e:"aunt · female teacher · Ms.",p:"koh",s:"Cháu chào cô ạ. – Hello, auntie/teacher."},
+{v:"chú",e:"uncle (younger than your parent)",p:"choo (rising)",s:"Chú ơi, bao nhiêu tiền? – Uncle, how much?"},
+{v:"bác",e:"uncle/aunt older than your parent",p:"bahk (rising, short)",s:"Bác khỏe không ạ? – How are you, uncle/auntie?"},
+{v:"ông",e:"grandfather · elderly man",p:"ohm",s:"Ông có khỏe không ạ? – Are you well, sir?"},
+{v:"bà",e:"grandmother · elderly woman",p:"bah (low falling)",s:"Bà ăn cơm chưa ạ? – Have you eaten, ma’am?"},
+{v:"cháu",e:"child · grandchild · niece/nephew · I (to elders)",p:"chow (rising)",s:"Cháu cảm ơn bác. – Thank you, uncle/auntie."}]},
+{n:"Numbers – Số",items:[
+{g:"Basics 0–10",v:"không",e:"zero (0)",p:"khohng",s:"Không sao đâu. – No problem."},
+{v:"một",e:"one (1)",p:"moht (low, heavy)",s:"Một cà phê. – One coffee."},
+{v:"hai",e:"two (2)",p:"high",s:"Hai người. – Two people."},
+{v:"ba",e:"three (3)",p:"bah",s:"Ba giờ. – Three o’clock."},
+{v:"bốn",e:"four (4)",p:"bohn (rising)",s:"Bốn quả táo. – Four apples."},
+{v:"năm",e:"five (5)",p:"nuhm (low falling)",s:"Năm phút. – Five minutes."},
+{v:"sáu",e:"six (6)",p:"show (rising)",s:"Sáu giờ sáng. – Six in the morning."},
+{v:"bảy",e:"seven (7)",p:"bye (dip, then rise)",s:"Bảy ngày. – Seven days."},
+{v:"tám",e:"eight (8)",p:"tahm (rising)",s:"Tám giờ tối. – Eight in the evening."},
+{v:"chín",e:"nine (9)",p:"cheen (rising)",s:"Chín tuổi. – Nine years old."},
+{v:"mười",e:"ten (10)",p:"muh-ee (low falling)",s:"Mười phút. – Ten minutes."},
+{g:"Beyond 10",gn:"After a ten, 5 becomes lăm and 1 becomes mốt: 25 = hai mươi lăm, 21 = hai mươi mốt.",v:"mười một",e:"eleven (11)",p:"muh-ee moht",s:"Mười một giờ. – Eleven o’clock."},
+{v:"mười lăm",e:"fifteen (15)",p:"muh-ee lum",s:"Mười lăm phút. – Fifteen minutes."},
+{v:"hai mươi",e:"twenty (20)",p:"high muh-uh-ee",s:"Hai mươi tuổi. – Twenty years old."},
+{v:"hai mươi mốt",e:"twenty-one (21)",p:"high muh-uh-ee moht (rising)",s:"Tôi hai mươi mốt tuổi. – I am 21 years old."},
+{v:"một trăm",e:"one hundred (100)",p:"moht chum",s:"Một trăm người. – One hundred people."},
+{v:"một nghìn",e:"one thousand (1,000)",p:"moht ngeen (low falling)",s:"Năm nghìn đồng. – 5,000 dong."},
+{v:"một triệu",e:"one million (1,000,000)",p:"moht chee-eo (low, heavy)",s:"Một triệu đồng. – One million dong."},
+{g:"Useful",v:"bao nhiêu",e:"how many · how much",p:"bow nyew",s:"Cái này bao nhiêu? – How much is this?"}]},
+{n:"Location – Vị trí",items:[
+{g:"Here and there",v:"đây",e:"here",p:"duh-ee",s:"Tôi ở đây. – I am here."},
+{v:"đó",e:"there",p:"daw (rising)",s:"Chợ ở đó. – The market is there."},
+{v:"kia",e:"over there (farther)",p:"kee-uh",s:"Nhà tôi ở kia. – My house is over there."},
+{v:"ở",e:"to be at · to live in",p:"uh (dipping)",s:"Tôi ở Hà Nội. – I live in Hanoi."},
+{v:"ở đâu",e:"where",p:"uh duh-oo",s:"Nhà vệ sinh ở đâu? – Where is the toilet?"},
+{g:"Positions",gn:"Put ở before these to say where something is: Sách ở trên bàn.",v:"trong",e:"in · inside",p:"chawng",s:"Chìa khóa trong túi. – The keys are in the bag."},
+{v:"ngoài",e:"outside",p:"ng-wye (low falling)",s:"Anh ấy ở ngoài. – He is outside."},
+{v:"trên",e:"on · above",p:"chen",s:"Sách ở trên bàn. – The book is on the table."},
+{v:"dưới",e:"under · below",p:"zuh-ee (rising)",s:"Mèo ở dưới bàn. – The cat is under the table."},
+{v:"trước",e:"in front of · before",p:"chuh-uhk (rising)",s:"Quán ở trước chợ. – The shop is in front of the market."},
+{v:"sau",e:"behind · after",p:"sow",s:"Nhà ở sau chợ. – The house is behind the market."},
+{v:"giữa",e:"between · in the middle",p:"zuh-uh (broken rising)",s:"Hồ Gươm ở giữa Hà Nội. – Hoan Kiem Lake is in the middle of Hanoi."},
+{v:"cạnh",e:"next to",p:"kayn (low, heavy)",s:"Quán cà phê cạnh chợ. – The café is next to the market."},
+{v:"gần",e:"near",p:"guhn (low falling)",s:"Nhà tôi gần đây. – My house is near here."},
+{v:"xa",e:"far",p:"sah",s:"Có xa không? – Is it far?"},
+{g:"Directions",v:"bên trái",e:"left",p:"ben chai (rising)",s:"Rẽ bên trái. – Turn left."},
+{v:"bên phải",e:"right",p:"ben fye (dipping)",s:"Rẽ bên phải. – Turn right."},
+{v:"đi thẳng",e:"go straight",p:"dee tahng (dipping)",s:"Đi thẳng nhé. – Go straight, okay?"},
+{v:"rẽ",e:"to turn",p:"zeh (broken rising)",s:"Rẽ ở đây. – Turn here."}]}
+];
+var L=document.getElementById("list"),T=document.getElementById("tabs"),cur=0;
+function card(x){return '<div class="c" onclick="this.classList.toggle(\'f\')"><div class="in"><div class="face front"><div class="w">'+x.v+'</div><div class="hint">tap to flip</div></div><div class="face back"><div class="lab">English</div><div class="val">'+x.e+'</div><div class="lab" style="margin-top:8px">Say it</div><div class="pr">'+x.p+'</div><div class="ex">'+x.s+'</div></div></div></div>';}
+function render(){
+  T.innerHTML=C.map(function(c,i){return '<button data-i="'+i+'" class="'+(i===cur?'on':'')+'">'+c.n+'</button>';}).join("");
+  L.innerHTML=C[cur].items.map(function(x){
+    var h="";
+    if(x.g)h+='<div><h3>'+x.g+'</h3>'+(x.gn?'<p class="gn">'+x.gn+'</p>':'')+'</div>';
+    return h+card(x);
+  }).join("");
+  window.scrollTo(0,0);
+}
+T.onclick=function(e){var i=e.target.getAttribute("data-i");if(i===null)return;cur=+i;render();};
+render();
+</script>
+<script>
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}
+</script>
+</body>
+</html>
